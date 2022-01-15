@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.usercenteradmin.repository.UserMapper">
+    <resultMap id="BaseResultMap" type="com.zy.usercenteradmin.entity.User">
+        <!--@mbg.generated-->
+        <!--@Table `user`-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="dept_id" jdbcType="INTEGER" property="deptId"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="enabled" jdbcType="TINYINT" property="enabled"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, dept_id, username, enabled, gender, nick_name
+    </sql>
+    <resultMap extends="BaseResultMap" id="userDetailResultMap" type="com.zy.usercenteradmin.dto.UserDTO">
+        <association javaType="com.zy.usercenteradmin.entity.Dept" property="dept">
+            <id column="id" jdbcType="INTEGER" property="id" />
+            <result column="pid" jdbcType="INTEGER" property="pid" />
+            <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+            <result column="dept_abbreviation" jdbcType="VARCHAR" property="deptAbbreviation" />
+            <result column="dept_level" jdbcType="INTEGER" property="deptLevel" />
+            <result column="dept_code" jdbcType="VARCHAR" property="deptCode" />
+            <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+            <result column="address" jdbcType="VARCHAR" property="address" />
+            <result column="remark" jdbcType="VARCHAR" property="remark" />
+            <result column="sort" jdbcType="INTEGER" property="sort" />
+            <result column="is_enabled" jdbcType="TINYINT" property="isEnabled" />
+            <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+            <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+        </association>
+        <collection ofType="com.zy.usercenteradmin.entity.Role" property="roles">
+            <id column="id" jdbcType="INTEGER" property="id" />
+            <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+            <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+            <result column="is_enabled" jdbcType="TINYINT" property="isEnabled" />
+            <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+            <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+            <result column="remark" jdbcType="VARCHAR" property="remark" />
+        </collection>
+    </resultMap>
+
+    <select id="userDetail" resultMap="userDetailResultMap">
+        select u.id id,
+               username,
+               enabled,
+               gender,
+               nick_name,
+               d.id dept_id,
+               d.pid,
+               d.dept_name,
+               d.dept_abbreviation,
+               d.dept_level,
+               d.dept_code,
+               d.telephone,
+               d.address,
+               d.remark,
+               r.id role_id,
+               r.role_code,
+               r.role_name
+        from user u
+                     left join dept d
+                on u.dept_id = d.id
+                     left join role_user_rel rur on u.id = rur.user_id
+                     left join role r on r.id = rur.role_id
+        where u.id = #{id,jdbcType=INTEGER}
+    </select>
+</mapper>

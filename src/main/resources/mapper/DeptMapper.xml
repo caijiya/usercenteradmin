@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.usercenteradmin.repository.DeptMapper">
+  <resultMap id="BaseResultMap" type="com.zy.usercenteradmin.entity.Dept">
+    <!--@mbg.generated-->
+    <!--@Table dept-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="dept_abbreviation" jdbcType="VARCHAR" property="deptAbbreviation" />
+    <result column="dept_level" jdbcType="INTEGER" property="deptLevel" />
+    <result column="dept_code" jdbcType="VARCHAR" property="deptCode" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="is_enabled" jdbcType="TINYINT" property="isEnabled" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, pid, dept_name, dept_abbreviation, dept_level, dept_code, telephone, address, 
+    remark, sort, is_enabled, gmt_create, gmt_modified
+  </sql>
+</mapper>

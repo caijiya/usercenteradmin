@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2022/1/16
  */
 public interface LoginService {
-    void captcha(String randomId, HttpServletResponse response);
+    void captcha(HttpServletResponse response);
 
     String login(LoginDTO loginDTO, String randomId);
+
+    void logout(String token);
 }

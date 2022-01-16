@@ -18,6 +18,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
@@ -38,8 +39,8 @@ public class LoginServiceImpl implements LoginService {
     UserMapper userMapper;
 
     @Override
-    public String login(LoginDTO loginDTO, String randomId) {
-        String captchaCode = stringRedisTemplate.opsForValue().get(Constants.REDIS_KEY_CAPTCHA + randomId);
+    public String login(LoginDTO loginDTO, String captchaKey) {
+        String captchaCode = stringRedisTemplate.opsForValue().get(Constants.REDIS_KEY_CAPTCHA + captchaKey);
         if (StrUtil.isBlank(captchaCode) || !loginDTO.getCaptchaCode().equals(captchaCode)) {
             log.warn("验证码校验失败，username：{}");
             throw new BaseException(ResultCodeEnum.CAPTCHA_ERROR);
@@ -63,7 +64,12 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public void captcha(String randomId, HttpServletResponse response) {
+    public void logout(String token) {
+        redisTemplate.delete(Constants.REDIS_KEY_TICKET_PREFIX + token);
+    }
+
+    @Override
+    public void captcha(HttpServletResponse response) {
         // 随机生成 4 位验证码
         RandomGenerator randomGenerator = new RandomGenerator("0123456789", 4);
         // 定义图片的显示大小
@@ -78,8 +84,13 @@ public class LoginServiceImpl implements LoginService {
             // 打印日志
             String code = lineCaptcha.getCode();
             log.info("生成的验证码:{}", code);
+            String captchaKey = UUID.randomUUID().toString();
             // redis存储验证码
-            stringRedisTemplate.opsForValue().set(Constants.REDIS_KEY_CAPTCHA + randomId, code, 30, TimeUnit.MINUTES);
+            stringRedisTemplate.opsForValue().set(Constants.REDIS_KEY_CAPTCHA + captchaKey, code, 30, TimeUnit.MINUTES);
+            Cookie cookie = new Cookie("captchaKey", captchaKey);
+            cookie.setDomain("/login");
+            cookie.setMaxAge(60 * 30);
+            response.addCookie(cookie);
             // 关闭流
             response.getOutputStream().close();
         } catch (IOException e) {

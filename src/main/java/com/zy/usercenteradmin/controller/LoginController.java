@@ -23,13 +23,18 @@ public class LoginController {
 
     @PostMapping("login")
     @NotNeedLogin
-    public Map login(@RequestBody @Validated LoginDTO loginDTO, @RequestHeader String randomId) {
-        return Collections.singletonMap("token", loginService.login(loginDTO, randomId));
+    public Map login(@RequestBody @Validated LoginDTO loginDTO, @RequestHeader String captchaKey) {
+        return Collections.singletonMap("token", loginService.login(loginDTO, captchaKey));
+    }
+
+    @PostMapping("logout")
+    public void logout(@RequestHeader String token) {
+        loginService.logout(token);
     }
 
     @NotNeedLogin
     @GetMapping("captcha")
-    public void captcha(@RequestParam String randomId, HttpServletResponse response) {
-        loginService.captcha(randomId, response);
+    public void captcha(HttpServletResponse response) {
+        loginService.captcha(response);
     }
 }

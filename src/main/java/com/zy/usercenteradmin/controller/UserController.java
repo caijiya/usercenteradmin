@@ -3,6 +3,7 @@ package com.zy.usercenteradmin.controller;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zy.usercenteradmin.dto.GrantRoleDTO;
 import com.zy.usercenteradmin.dto.UserDTO;
 import com.zy.usercenteradmin.dto.UserPageDTO;
 import com.zy.usercenteradmin.entity.User;
@@ -48,5 +49,11 @@ public class UserController {
     public UserDTO userDetail(@PathVariable Integer id) {
         return userService.userDetail(id);
     }
+
+    @PostMapping("grantRole")
+    public void grantRole(@RequestBody GrantRoleDTO grantRoleDTO) {
+        userService.grantRole(grantRoleDTO);
+    }
+
 
 }

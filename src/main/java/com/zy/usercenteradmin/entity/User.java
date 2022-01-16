@@ -27,6 +27,18 @@ public class User extends BaseEntity implements Serializable {
     private String username;
 
     /**
+     * 密码
+     */
+    @TableField(value = "`password`")
+    private String password;
+
+    /**
+     * 盐值
+     */
+    @TableField(value = "salt")
+    private String salt;
+
+    /**
      * 是否启用。0：禁用，1：启用
      */
     @TableField(value = "enabled")

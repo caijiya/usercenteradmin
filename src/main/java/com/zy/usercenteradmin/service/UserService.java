@@ -8,7 +8,10 @@ public interface UserService extends IService<User> {
 
 
     UserDTO userDetail(Integer id);
+
+    void addUser(User user);
 }
+
 
 
 

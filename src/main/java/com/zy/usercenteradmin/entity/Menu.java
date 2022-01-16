@@ -8,71 +8,101 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 
 /**
- * 资源
+ * 菜单权限表
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "menu")
 public class Menu extends BaseEntity implements Serializable {
     /**
-     * 父id
+     * 菜单名称
+     */
+    @TableField(value = "menu_name")
+    private String menuName;
+
+    /**
+     * 父菜单ID
      */
     @TableField(value = "pid")
     private Integer pid;
 
     /**
-     * 资源名称
+     * 显示顺序
      */
-    @TableField(value = "resource_name")
-    private String resourceName;
+    @TableField(value = "sort")
+    private Integer sort;
 
     /**
-     * 资源类型
+     * 路由地址
      */
-    @TableField(value = "resource_type")
-    private String resourceType;
+    @TableField(value = "`path`")
+    private String path;
 
     /**
-     * 资源uri
+     * 组件路径
      */
-    @TableField(value = "resource_uri")
-    private String resourceUri;
+    @TableField(value = "component")
+    private String component;
 
     /**
-     * 图标
+     * 是否为外链（0是 1否）
+     */
+    @TableField(value = "is_frame")
+    private Boolean isFrame;
+
+    /**
+     * 是否缓存（0缓存 1不缓存）
+     */
+    @TableField(value = "is_cache")
+    private Boolean isCache;
+
+    /**
+     * 菜单类型（M目录 C菜单 F按钮）
+     */
+    @TableField(value = "menu_type")
+    private String menuType;
+
+    /**
+     * 菜单状态（2隐藏 1显示）
+     */
+    @TableField(value = "visible")
+    private Boolean visible;
+
+    /**
+     * 菜单状态（1正常 0停用）
+     */
+    @TableField(value = "`status`")
+    private Boolean status;
+
+    /**
+     * 权限标识
+     */
+    @TableField(value = "perms")
+    private String perms;
+
+    /**
+     * 菜单图标
      */
     @TableField(value = "icon")
     private String icon;
 
     /**
-     * 权限标识
+     * 创建者
      */
-    @TableField(value = "permission")
-    private String permission;
+    @TableField(value = "create_by")
+    private String createBy;
 
     /**
-     * 路由地址
+     * 更新者
      */
-    @TableField(value = "lydz")
-    private String lydz;
+    @TableField(value = "update_by")
+    private String updateBy;
 
     /**
-     * 组件路径
+     * 备注
      */
-    @TableField(value = "zjlj")
-    private String zjlj;
-
-    /**
-     * 是否启用
-     */
-    @TableField(value = "is_enabled")
-    private Byte isEnabled;
-
-    /**
-     * 排序号
-     */
-    @TableField(value = "sort")
-    private Integer sort;
+    @TableField(value = "remark")
+    private String remark;
 
     private static final long serialVersionUID = 1L;
 }

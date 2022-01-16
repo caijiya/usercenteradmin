@@ -28,6 +28,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        if (handler != null) {
+            return true;
+        }
         if (handler.getClass().getAnnotation(NotNeedLogin.class) != null) {
             return true;
         }

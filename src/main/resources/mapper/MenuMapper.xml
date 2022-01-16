@@ -5,22 +5,27 @@
     <!--@mbg.generated-->
     <!--@Table menu-->
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
     <result column="pid" jdbcType="INTEGER" property="pid" />
-    <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
-    <result column="resource_type" jdbcType="VARCHAR" property="resourceType" />
-    <result column="resource_uri" jdbcType="VARCHAR" property="resourceUri" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="permission" jdbcType="VARCHAR" property="permission" />
-    <result column="lydz" jdbcType="VARCHAR" property="lydz" />
-    <result column="zjlj" jdbcType="VARCHAR" property="zjlj" />
-    <result column="is_enabled" jdbcType="TINYINT" property="isEnabled" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="is_frame" jdbcType="BOOLEAN" property="isFrame" />
+    <result column="is_cache" jdbcType="BOOLEAN" property="isCache" />
+    <result column="menu_type" jdbcType="CHAR" property="menuType" />
+    <result column="visible" jdbcType="BOOLEAN" property="visible" />
+    <result column="status" jdbcType="BOOLEAN" property="status" />
+    <result column="perms" jdbcType="VARCHAR" property="perms" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, pid, resource_name, resource_type, resource_uri, icon, permission, lydz, zjlj, 
-    is_enabled, gmt_create, gmt_modified, sort
+    id, menu_name, pid, sort, `path`, component, is_frame, is_cache, menu_type, visible, 
+    `status`, perms, icon, create_by, gmt_create, update_by, gmt_modified, remark
   </sql>
 </mapper>

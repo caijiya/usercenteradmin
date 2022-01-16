@@ -56,7 +56,7 @@ public class LoginServiceImpl implements LoginService {
         //将用户信息、权限信息缓存到redis todo 暂时只存基本信息
         String ticket = UUID.randomUUID().toString();
         //存储token与id的映射
-        redisTemplate.opsForValue().set(Constants.REDIS_KEY_TICKET_PREFIX + ticket, user.getId());
+        redisTemplate.opsForValue().set(Constants.REDIS_KEY_TICKET_PREFIX + ticket, user.getId(), 30, TimeUnit.MINUTES);
         //存储用户信息
         redisTemplate.opsForValue().set(Constants.REDIS_KEY_USER_PREFIX + user.getId(), user, 30, TimeUnit.MINUTES);
         return ticket;

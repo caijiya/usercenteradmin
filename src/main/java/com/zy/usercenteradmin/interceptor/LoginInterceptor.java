@@ -1,12 +1,12 @@
 package com.zy.usercenteradmin.interceptor;
 
 import cn.hutool.core.util.StrUtil;
-import com.zy.usercenteradmin.annotations.NotNeedLogin;
 import com.zy.usercenteradmin.common.BaseException;
 import com.zy.usercenteradmin.common.Constants;
 import com.zy.usercenteradmin.entity.User;
 import com.zy.usercenteradmin.enums.ResultCodeEnum;
 import com.zy.usercenteradmin.util.UserInfoHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.lang.Nullable;
@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Author: ZhaoYang
  * @Date: 2022/1/16
  */
+@Slf4j
 public class LoginInterceptor implements HandlerInterceptor {
     @Resource
     StringRedisTemplate stringRedisTemplate;
@@ -28,17 +29,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        if (handler != null) {
-            return true;
-        }
-        if (handler.getClass().getAnnotation(NotNeedLogin.class) != null) {
-            return true;
-        }
         String tokenHeader = request.getHeader(Constants.TOKEN_HEADER);
         if (StrUtil.isBlank(tokenHeader)) {
             throw new BaseException(ResultCodeEnum.LOGIN_EXPIRATION);
         }
-        String userId = stringRedisTemplate.opsForValue().get(Constants.REDIS_KEY_TICKET_PREFIX + tokenHeader);
+        String userId = stringRedisTemplate.opsForValue().get(Constants.TOKEN_PREFIX + tokenHeader);
         if (StrUtil.isBlank(userId)) {
             throw new BaseException(ResultCodeEnum.LOGIN_EXPIRATION);
         }

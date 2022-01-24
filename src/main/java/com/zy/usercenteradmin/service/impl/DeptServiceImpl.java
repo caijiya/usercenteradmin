@@ -30,7 +30,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
 
     private List<DeptDTO> getChild(DeptDTO root, List<DeptDTO> all) {
         List<DeptDTO> child = all.stream().filter(dept ->
-                dept.getPid() == root.getId()).map((dept) -> {
+                dept.getPid().equals(root.getId())).map((dept) -> {
             dept.setChildren(getChild(dept, all));
             return dept;
         }).sorted(Comparator.comparingInt(Dept::getSort)).collect(Collectors.toList());

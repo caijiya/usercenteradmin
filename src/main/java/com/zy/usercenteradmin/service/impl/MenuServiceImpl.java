@@ -1,6 +1,7 @@
 package com.zy.usercenteradmin.service.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zy.usercenteradmin.dto.MenuDTO;
 import com.zy.usercenteradmin.entity.Menu;
@@ -17,7 +18,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public List<MenuDTO> menuTree() {
-        List<Menu> menus = this.list();
+        List<Menu> menus = this.list(new LambdaQueryWrapper<Menu>().in(Menu::getMenuType, "M", "C"));
         List<MenuDTO> menuDTOS = JSONUtil.toList(JSONUtil.toJsonStr(menus), MenuDTO.class);
         List<MenuDTO> tree = menuDTOS.stream().filter(menu ->
                 menu.getPid() == 0
@@ -30,7 +31,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     private List<MenuDTO> getChild(MenuDTO root, List<MenuDTO> all) {
         List<MenuDTO> child = all.stream().filter(menu ->
-                menu.getPid() == root.getId()).map((menu) -> {
+                menu.getPid().equals(root.getId())).map((menu) -> {
             menu.setChildren(getChild(menu, all));
             return menu;
         }).sorted(Comparator.comparingInt(Menu::getSort)).collect(Collectors.toList());

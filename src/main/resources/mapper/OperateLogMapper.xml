@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.usercenteradmin.repository.OperateLogMapper">
+  <resultMap id="BaseResultMap" type="com.zy.usercenteradmin.entity.OperateLog">
+    <!--@mbg.generated-->
+    <!--@Table operate_log-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="operate_id" jdbcType="BIGINT" property="operateId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="business_type" jdbcType="INTEGER" property="businessType" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="request_method" jdbcType="VARCHAR" property="requestMethod" />
+    <result column="operator_type" jdbcType="INTEGER" property="operatorType" />
+    <result column="operate_name" jdbcType="VARCHAR" property="operateName" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="operate_url" jdbcType="VARCHAR" property="operateUrl" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+    <result column="operate_location" jdbcType="VARCHAR" property="operateLocation" />
+    <result column="operate_param" jdbcType="VARCHAR" property="operateParam" />
+    <result column="operate_status" jdbcType="INTEGER" property="operateStatus" />
+    <result column="error_msg" jdbcType="VARCHAR" property="errorMsg" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, operate_id, title, business_type, `method`, request_method, operator_type, operate_name, 
+    dept_name, operate_url, operate_ip, operate_location, operate_param, operate_status, 
+    error_msg, operate_time
+  </sql>
+</mapper>

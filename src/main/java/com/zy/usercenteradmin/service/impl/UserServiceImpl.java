@@ -62,7 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public IPage<UserDTO> pageList(UserPageDTO userPageDTO) {
-        return userMapper.pageList(userPageDTO);
+        return userMapper.pageList(userPageDTO.getPageDTO(), userPageDTO);
     }
 
     @Override

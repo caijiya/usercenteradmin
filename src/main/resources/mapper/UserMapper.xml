@@ -22,7 +22,7 @@
     </sql>
     <resultMap extends="BaseResultMap" id="userDetailResultMap" type="com.zy.usercenteradmin.dto.UserDTO">
         <association javaType="com.zy.usercenteradmin.entity.Dept" property="dept">
-            <id column="id" jdbcType="INTEGER" property="id"/>
+            <id column="dept_id" jdbcType="INTEGER" property="id"/>
             <result column="pid" jdbcType="INTEGER" property="pid"/>
             <result column="dept_name" jdbcType="VARCHAR" property="deptName"/>
             <result column="dept_abbreviation" jdbcType="VARCHAR" property="deptAbbreviation"/>
@@ -30,26 +30,21 @@
             <result column="dept_code" jdbcType="VARCHAR" property="deptCode"/>
             <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
             <result column="address" jdbcType="VARCHAR" property="address"/>
-            <result column="remark" jdbcType="VARCHAR" property="remark"/>
-            <result column="sort" jdbcType="INTEGER" property="sort"/>
-            <result column="is_enabled" jdbcType="TINYINT" property="isEnabled"/>
-            <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
-            <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
         </association>
         <collection ofType="com.zy.usercenteradmin.entity.Role" property="roles">
-            <id column="id" jdbcType="INTEGER" property="id"/>
+            <id column="role_id" jdbcType="INTEGER" property="id"/>
             <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
             <result column="role_code" jdbcType="VARCHAR" property="roleCode"/>
-            <result column="remark" jdbcType="VARCHAR" property="remark"/>
         </collection>
     </resultMap>
 
     <sql id="baseUserSql">
-        select u.id id,
+        select u.id,
                username,
                enabled,
                gender,
                nick_name,
+               u.gmt_create,
                d.id dept_id,
                d.pid,
                d.dept_name,
@@ -58,7 +53,6 @@
                d.dept_code,
                d.telephone,
                d.address,
-               d.remark,
                r.id role_id,
                r.role_code,
                r.role_name
@@ -79,9 +73,13 @@
         <include refid="baseUserSql">
         </include>
         <where>
-            <if test="nickName != null and nickName != ''">
-                and nick_name like concat( '%', #{nickName,jdbcType=VARCHAR}, '%')
+            <if test="userPageDTO.username != null and userPageDTO.username != ''">
+                and username like concat('%', #{userPageDTO.username,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="userPageDTO.deptCode != null and userPageDTO.deptCode != ''">
+                and d.dept_code like concat('%', #{userPageDTO.deptCode,jdbcType=VARCHAR}, '%')
             </if>
         </where>
+        order by u.gmt_modified
     </select>
 </mapper>

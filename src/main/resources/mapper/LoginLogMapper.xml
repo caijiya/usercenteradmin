@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.usercenteradmin.repository.LoginLogMapper">
+  <resultMap id="BaseResultMap" type="com.zy.usercenteradmin.entity.LoginLog">
+    <!--@mbg.generated-->
+    <!--@Table login_log-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="info_id" jdbcType="INTEGER" property="infoId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="ipaddr" jdbcType="VARCHAR" property="ipaddr" />
+    <result column="login_location" jdbcType="VARCHAR" property="loginLocation" />
+    <result column="result" jdbcType="BOOLEAN" property="result" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+    <result column="user_agent" jdbcType="VARCHAR" property="userAgent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, info_id, username, ipaddr, login_location, `result`, login_time, msg, user_agent
+  </sql>
+</mapper>

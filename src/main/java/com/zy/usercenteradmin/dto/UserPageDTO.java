@@ -11,4 +11,5 @@ import lombok.Data;
 @Data
 public class UserPageDTO extends User {
     private PageDTO pageDTO;
+    private String deptCode;
 }

@@ -21,19 +21,13 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         List<DeptDTO> deptDTOS = JSONUtil.toList(JSONUtil.toJsonStr(depts), DeptDTO.class);
         List<DeptDTO> tree = deptDTOS.stream().filter(dept ->
                 dept.getPid() == 0
-        ).map((dept) -> {
-            dept.setChildren(getChild(dept, deptDTOS));
-            return dept;
-        }).sorted(Comparator.comparingInt(Dept::getSort)).collect(Collectors.toList());
+        ).peek(dept -> dept.setChildren(getChild(dept, deptDTOS))).sorted(Comparator.comparingInt(Dept::getSort)).collect(Collectors.toList());
         return tree;
     }
 
     private List<DeptDTO> getChild(DeptDTO root, List<DeptDTO> all) {
         List<DeptDTO> child = all.stream().filter(dept ->
-                dept.getPid().equals(root.getId())).map((dept) -> {
-            dept.setChildren(getChild(dept, all));
-            return dept;
-        }).sorted(Comparator.comparingInt(Dept::getSort)).collect(Collectors.toList());
+                dept.getPid().equals(root.getId())).peek((dept) -> dept.setChildren(getChild(dept, all))).collect(Collectors.toList());
         return child;
     }
 }

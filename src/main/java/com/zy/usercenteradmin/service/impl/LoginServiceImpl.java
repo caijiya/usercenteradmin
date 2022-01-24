@@ -107,7 +107,7 @@ public class LoginServiceImpl implements LoginService {
         // 随机生成 4 位验证码
         RandomGenerator randomGenerator = new RandomGenerator("0123456789", 4);
         // 定义图片的显示大小
-        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(148, 48);
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(130, 40);
         response.setContentType("image/jpeg");
         response.setHeader("Pragma", "No-cache");
         try {

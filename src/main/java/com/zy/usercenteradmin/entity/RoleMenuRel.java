@@ -1,7 +1,6 @@
 package com.zy.usercenteradmin.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,13 +17,13 @@ public class RoleMenuRel extends BaseEntity implements Serializable {
     /**
      * 角色ID
      */
-    @TableId(value = "role_id", type = IdType.INPUT)
+    @TableField(value = "role_id")
     private Integer roleId;
 
     /**
      * 菜单ID
      */
-    @TableId(value = "menu_id", type = IdType.INPUT)
+    @TableField(value = "menu_id")
     private Integer menuId;
 
     private static final long serialVersionUID = 1L;

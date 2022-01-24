@@ -3,9 +3,11 @@ package com.zy.usercenteradmin.service.impl;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zy.usercenteradmin.dto.GrantRoleDTO;
 import com.zy.usercenteradmin.dto.UserDTO;
+import com.zy.usercenteradmin.dto.UserPageDTO;
 import com.zy.usercenteradmin.entity.RoleUserRel;
 import com.zy.usercenteradmin.entity.User;
 import com.zy.usercenteradmin.repository.UserMapper;
@@ -17,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.zy.usercenteradmin.common.Constants.DEFAULT_PASSWORD;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
@@ -54,6 +58,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             roleUserRels.add(roleUserRel);
         });
         roleUserRelService.saveBatch(roleUserRels);
+    }
+
+    @Override
+    public IPage<UserDTO> pageList(UserPageDTO userPageDTO) {
+        return userMapper.pageList(userPageDTO);
+    }
+
+    @Override
+    public void resetPassword(String userId) {
+        User user = this.getById(userId);
+        String password = DigestUtil.md5Hex(user.getSalt() + DEFAULT_PASSWORD);
+        user.setPassword(password);
+        this.updateById(user);
     }
 }
 

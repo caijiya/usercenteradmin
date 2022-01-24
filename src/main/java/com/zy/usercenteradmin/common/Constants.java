@@ -10,4 +10,5 @@ public class Constants {
     public static final String REDIS_KEY_CAPTCHA = "captcha:";
     public static final String TOKEN_HEADER = "X-Token";
     public static final String TOKEN_PREFIX = TOKEN_HEADER + ":";
+    public static final String DEFAULT_PASSWORD = "123456";
 }

@@ -44,7 +44,7 @@
         </collection>
     </resultMap>
 
-    <select id="userDetail" resultMap="userDetailResultMap">
+    <sql id="baseUserSql">
         select u.id id,
                username,
                enabled,
@@ -67,6 +67,21 @@
                 on u.dept_id = d.id
                      left join role_user_rel rur on u.id = rur.user_id
                      left join role r on r.id = rur.role_id
+    </sql>
+
+    <select id="userDetail" resultMap="userDetailResultMap">
+        <include refid="baseUserSql">
+        </include>
         where u.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="pageList" resultMap="userDetailResultMap">
+        <include refid="baseUserSql">
+        </include>
+        <where>
+            <if test="nickName != null and nickName != ''">
+                and nick_name like concat( '%', #{nickName,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
     </select>
 </mapper>

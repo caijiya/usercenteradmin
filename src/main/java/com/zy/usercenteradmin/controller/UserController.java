@@ -1,7 +1,5 @@
 package com.zy.usercenteradmin.controller;
 
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.zy.usercenteradmin.dto.GrantRoleDTO;
 import com.zy.usercenteradmin.dto.UserDTO;
@@ -25,9 +23,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("pageList")
-    public IPage<User> pageList(@RequestBody UserPageDTO userPageDTO) {
-        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>().likeRight(StrUtil.isNotBlank(userPageDTO.getNickName()), User::getNickName, userPageDTO.getNickName());
-        return userService.page(userPageDTO.getPageDTO(), wrapper);
+    public IPage<UserDTO> pageList(@RequestBody UserPageDTO userPageDTO) {
+        return userService.pageList(userPageDTO);
     }
 
     @PostMapping("add")
@@ -53,6 +50,11 @@ public class UserController {
     @PostMapping("grantRole")
     public void grantRole(@RequestBody GrantRoleDTO grantRoleDTO) {
         userService.grantRole(grantRoleDTO);
+    }
+
+    @PostMapping("resetPassword/{userId}")
+    public void resetPassword(@PathVariable String userId) {
+        userService.resetPassword(userId);
     }
 
 

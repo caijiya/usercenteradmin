@@ -8,8 +8,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zy.usercenteradmin.dto.GrantRoleDTO;
 import com.zy.usercenteradmin.dto.UserDTO;
 import com.zy.usercenteradmin.dto.UserPageDTO;
+import com.zy.usercenteradmin.entity.Menu;
 import com.zy.usercenteradmin.entity.RoleUserRel;
 import com.zy.usercenteradmin.entity.User;
+import com.zy.usercenteradmin.repository.MenuMapper;
 import com.zy.usercenteradmin.repository.UserMapper;
 import com.zy.usercenteradmin.service.RoleUserRelService;
 import com.zy.usercenteradmin.service.UserService;
@@ -29,6 +31,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     UserMapper userMapper;
     @Resource
     RoleUserRelService roleUserRelService;
+    @Resource
+    MenuMapper menuMapper;
 
 
     @Override
@@ -72,7 +76,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setPassword(password);
         this.updateById(user);
     }
+
+    @Override
+    public List<Menu> menusByUserId(Integer userId) {
+        return menuMapper.menusByUserId(userId);
+    }
 }
+
+
 
 
 

@@ -28,4 +28,12 @@
     id, menu_name, pid, sort, `path`, component, is_frame, is_cache, menu_type, visible, 
     `status`, perms, icon, create_by, gmt_create, update_by, gmt_modified, remark
   </sql>
+
+  <select id="menusByUserId" resultMap="BaseResultMap">
+    select *
+    from menu
+    where id in (select menu_id
+                 from role_menu_rel rmr
+                 where role_id in (select role_id from role_user_rel where user_id = #{userId,jdbcType=INTEGER}))
+    </select>
 </mapper>

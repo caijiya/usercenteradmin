@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.zy.usercenteradmin.dto.GrantRoleDTO;
 import com.zy.usercenteradmin.dto.UserDTO;
 import com.zy.usercenteradmin.dto.UserPageDTO;
+import com.zy.usercenteradmin.entity.Menu;
 import com.zy.usercenteradmin.entity.User;
 import com.zy.usercenteradmin.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (`user`)
@@ -57,5 +59,9 @@ public class UserController {
         userService.resetPassword(userId);
     }
 
+    @GetMapping("menusByUserId/{userId}")
+    public List<Menu> menusByUserId(@PathVariable Integer userId) {
+        return userService.menusByUserId(userId);
+    }
 
 }

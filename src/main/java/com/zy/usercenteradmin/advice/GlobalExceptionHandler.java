@@ -47,5 +47,15 @@ public class GlobalExceptionHandler {
         return R.error();
     }
 
+    /**
+     * -------- 通用异常处理方法 --------
+     **/
+    @ExceptionHandler(Error.class)
+    @ResponseBody
+    public R error(Error e) {
+        e.printStackTrace();
+        return R.error();
+    }
+
 
 }

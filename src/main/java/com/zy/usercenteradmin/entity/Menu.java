@@ -48,13 +48,13 @@ public class Menu extends BaseEntity implements Serializable {
      * 是否为外链（0是 1否）
      */
     @TableField(value = "is_frame")
-    private Boolean isFrame;
+    private Byte isFrame;
 
     /**
      * 是否缓存（0缓存 1不缓存）
      */
     @TableField(value = "is_cache")
-    private Boolean isCache;
+    private Byte isCache;
 
     /**
      * 菜单类型（M目录 C菜单 F按钮）
@@ -66,13 +66,13 @@ public class Menu extends BaseEntity implements Serializable {
      * 菜单状态（2隐藏 1显示）
      */
     @TableField(value = "visible")
-    private Boolean visible;
+    private Byte visible;
 
     /**
      * 菜单状态（1正常 0停用）
      */
     @TableField(value = "`status`")
-    private Boolean status;
+    private byte status;
 
     /**
      * 权限标识

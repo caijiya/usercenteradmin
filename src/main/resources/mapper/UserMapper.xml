@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zy.usercenteradmin.repository.UserMapper">
-    <resultMap id="BaseResultMap" type="com.zy.usercenteradmin.entity.User">
-        <!--@mbg.generated-->
-        <!--@Table `user`-->
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="dept_id" jdbcType="INTEGER" property="deptId"/>
-        <result column="username" jdbcType="VARCHAR" property="username"/>
-        <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="salt" jdbcType="VARCHAR" property="salt"/>
-        <result column="enabled" jdbcType="TINYINT" property="enabled"/>
-        <result column="gender" jdbcType="VARCHAR" property="gender"/>
-        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
-        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
-        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-        <!--@mbg.generated-->
-        id, dept_id, username, `password`, salt, enabled, gender, nick_name, gmt_create,
-        gmt_modified
-    </sql>
+  <resultMap id="BaseResultMap" type="com.zy.usercenteradmin.entity.User">
+    <!--@mbg.generated-->
+    <!--@Table `user`-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, dept_id, username, `password`, salt, enabled, gender, nick_name, gmt_create, 
+    gmt_modified
+  </sql>
     <resultMap extends="BaseResultMap" id="userDetailResultMap" type="com.zy.usercenteradmin.dto.UserDTO">
         <association javaType="com.zy.usercenteradmin.entity.Dept" property="dept">
-            <id column="dept_id" jdbcType="INTEGER" property="id"/>
-            <result column="pid" jdbcType="INTEGER" property="pid"/>
-            <result column="dept_name" jdbcType="VARCHAR" property="deptName"/>
-            <result column="dept_abbreviation" jdbcType="VARCHAR" property="deptAbbreviation"/>
-            <result column="dept_level" jdbcType="INTEGER" property="deptLevel"/>
-            <result column="dept_code" jdbcType="VARCHAR" property="deptCode"/>
-            <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
-            <result column="address" jdbcType="VARCHAR" property="address"/>
+            <id column="dept_id" jdbcType="INTEGER" property="id" />
+            <result column="pid" jdbcType="INTEGER" property="pid" />
+            <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+            <result column="dept_abbreviation" jdbcType="VARCHAR" property="deptAbbreviation" />
+            <result column="dept_level" jdbcType="INTEGER" property="deptLevel" />
+            <result column="dept_code" jdbcType="VARCHAR" property="deptCode" />
+            <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+            <result column="address" jdbcType="VARCHAR" property="address" />
         </association>
         <collection ofType="com.zy.usercenteradmin.entity.Role" property="roles">
-            <id column="role_id" jdbcType="INTEGER" property="id"/>
-            <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
-            <result column="role_code" jdbcType="VARCHAR" property="roleCode"/>
+            <id column="role_id" jdbcType="INTEGER" property="id" />
+            <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+            <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
         </collection>
     </resultMap>
 

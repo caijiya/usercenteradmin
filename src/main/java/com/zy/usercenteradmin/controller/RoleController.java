@@ -1,14 +1,18 @@
-package com.zy.rolecenteradmin.controller;
+package com.zy.usercenteradmin.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zy.usercenteradmin.dto.GrantMenuDTO;
 import com.zy.usercenteradmin.dto.RolePageDTO;
+import com.zy.usercenteradmin.entity.Menu;
 import com.zy.usercenteradmin.entity.Role;
 import com.zy.usercenteradmin.service.RoleService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (`role`)
@@ -25,7 +29,8 @@ public class RoleController {
     public IPage<Role> pageList(@RequestBody RolePageDTO rolePageDTO) {
         LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<Role>()
                 .like(StrUtil.isNotBlank(rolePageDTO.getRoleName()), Role::getRoleName, rolePageDTO.getRoleName())
-                .like(StrUtil.isNotBlank(rolePageDTO.getRoleCode()), Role::getRoleCode, rolePageDTO.getRoleCode());
+                .like(StrUtil.isNotBlank(rolePageDTO.getRoleCode()), Role::getRoleCode, rolePageDTO.getRoleCode())
+                .eq(rolePageDTO.getIsEnabled() != null, Role::getIsEnabled, rolePageDTO.getIsEnabled());
         return roleService.page(rolePageDTO.getPageDTO(), wrapper);
     }
 
@@ -47,6 +52,16 @@ public class RoleController {
     @GetMapping("{id}")
     public Role roleDetail(@PathVariable Integer id) {
         return roleService.getById(id);
+    }
+
+    @PostMapping("grantMenus")
+    public void grantMenus(@RequestBody @Validated GrantMenuDTO grantMenuDTO) {
+        roleService.grantMenus(grantMenuDTO);
+    }
+
+    @GetMapping("menusByRoleId/{roleId}")
+    public List<Menu> menusByRoleId(@PathVariable Integer roleId) {
+        return roleService.menusByRoleId(roleId);
     }
 
 

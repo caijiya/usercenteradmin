@@ -128,8 +128,9 @@ VALUES (3, 2, 'LB', '', null, 1, 'MALE', '刘备', '2022-01-15 08:48:45', '2022-
 INSERT INTO usercenter.user (id, dept_id, username, password, salt, enabled, gender, nick_name, gmt_create,
                              gmt_modified)
 VALUES (4, 2, 'GY', '', null, 1, 'MALE', '关羽', '2022-01-15 08:48:45', '2022-01-15 08:48:45');
-INSERT INTO usercenter.user (id, dept_id, username, password, salt, enabled, gender, nick_name, gmt_create,
-                             gmt_modified)
+usercenter.user (id, dept_id, username, password, salt, enabled, gender, nick_name, gmt_create,
+
+INSERT INTO                  gmt_modified)
 VALUES (5, 2, 'ZF', '', null, 1, 'MALE', '张飞', '2022-01-15 08:48:45', '2022-01-15 08:48:45');
 INSERT INTO usercenter.user (id, dept_id, username, password, salt, enabled, gender, nick_name, gmt_create,
                              gmt_modified)

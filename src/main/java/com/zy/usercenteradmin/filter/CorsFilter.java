@@ -23,11 +23,6 @@ import java.io.IOException;
 @WebFilter(urlPatterns = "/*")
 @Order(-99999)
 public class CorsFilter extends HttpFilter {
-
-
-    /**
-     *
-     */
     private static final long serialVersionUID = 2386571986045107652L;
     private static final String OPTIONS_METHOD = "OPTIONS";
 
